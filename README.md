@@ -65,3 +65,23 @@ To work with this application locally, you need to clone this repository to your
    $ .\FH\Scripts\activate
    ```
 ### Step 4: Install Flask and Dependencies 
+1. Install Flask and SQLAlchemy:
+   ```
+   $ (FH) pip install flask flask-sqlalchemy
+   ```
+   
+## How to Run
+1. Finally start the web server:
+   ```
+   $ (FH) python app.py
+   ```
+This server will start on port 5000 by default. You can change this in `app.py` by changing the following line to this:
+
+```python
+if __name__ == "__main__":
+    app.run(debug=True, port=<desired port>)
+```
+
+## Static files and Database
+
+Currently, the static files are loaded in the static/data directory as .parquet files. Additional and new files can be added to the same directory. The repo shall be updated when the files are stored in a database. 
