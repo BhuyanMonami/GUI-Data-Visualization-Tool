@@ -34,12 +34,13 @@ Before you can run this application locally, ensure you have Python 3.8 or a new
 
 Open a terminal and enter the following commands:
 
-```bash
+```
 sudo apt update
 sudo apt install python3.8
-```bash
+```
 
 To verify your installation, open a terminal and run:
 
-```bash
+```
 python --version
+```
