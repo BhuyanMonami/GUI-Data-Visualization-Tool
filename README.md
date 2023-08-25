@@ -47,7 +47,7 @@ python --version
 ### Step 2: Clone this Repository
 To work with this application locally, you need to clone this repository to your machine.
 1. Change the current working directory to the location where you want the cloned directory.
-2.   Open a terminal or command prompt and use the following commands:
+2. Open a terminal or command prompt and use the following commands:
    ```
    git clone https://github.com/MonamiBhuyan/FirstHydrogenGUI.git
    ```
@@ -56,7 +56,7 @@ To work with this application locally, you need to clone this repository to your
    ```
    $ pip install virtualenv
    ```
-2. Open a terminal in the project root directory and run:
+2. Open a terminal in the project root directory (FirstHydrogenGUI)and run:
    ```
    $ virtualenv FH
    ```
