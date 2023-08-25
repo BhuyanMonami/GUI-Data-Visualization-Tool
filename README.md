@@ -62,5 +62,6 @@ To work with this application locally, you need to clone this repository to your
    ```
 3. Then run the command:
    ```
-   $ .\env\Scripts\activate
+   $ .\FH\Scripts\activate
    ```
+### Step 4: Install Flask and Dependencies 
