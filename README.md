@@ -18,3 +18,22 @@ This GUI application is designed to provide a user-friendly interface for visual
 
 
 ## Installation
+### Step 1: Install Python 3.8 or Newer
+
+Before you can run this application locally, ensure you have Python 3.8 or a newer version installed on your system. Follow the appropriate instructions below based on your operating system:
+
+#### Windows:
+
+1. Visit the [Python Downloads](https://www.python.org/downloads/) page.
+2. Download the latest Python installer for Windows.
+3. Run the installer.
+4. During installation, be sure to check the box that says "Add Python X.X to PATH" (X.X represents your Python version).
+5. Complete the installation.
+
+#### Linux (Ubuntu/Debian):
+
+Open a terminal and enter the following commands:
+
+```bash
+sudo apt update
+sudo apt install python3.8
