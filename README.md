@@ -37,6 +37,7 @@ Open a terminal and enter the following commands:
 ```bash
 sudo apt update
 sudo apt install python3.8
+```bash
 
 To verify your installation, open a terminal and run:
 
