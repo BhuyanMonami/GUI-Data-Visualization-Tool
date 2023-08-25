@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  class="light-style layout-menu-fixed"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="../static/"
+  data-template="vertical-menu-template-free"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+
+    <title>Dashboard - Analytics | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+
+    <meta name="description" content="" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/favicon/favicon.ico') }}" />
+
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Icons. Uncomment required icon fonts -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/fonts/boxicons.css')}}" />
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/css/core.css') }}" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/css/theme-default.css') }}" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/demo.css') }}" />
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/libs/apex-charts/apex-charts.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+
+    <!-- Page CSS -->
+
+    <!-- Helpers -->
+    <script src="{{ url_for('static', filename='vendor/js/helpers.js') }}"></script>
+
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="{{ url_for('static', filename='js/config.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+
+    <script>
+        $(document).ready(function () {
+            $("#test").CreateMultiCheckBox({ width: '230px', defaultText : 'Select Below', height:'250px' });
+        });
+    </script>
+        <script>
+        $(document).ready(function () {
+            $("#test_2").CreateMultiCheckBox({ width: '230px', defaultText : 'Select Below', height:'250px' });
+        });
+    </script>
+            <script>
+        $(document).ready(function () {
+            $("#test_3").CreateMultiCheckBox({ width: '230px', defaultText : 'Select Below', height:'250px' });
+        });
+    </script>
+        
+            <script>
+        $(document).ready(function () {
+            $("#test_4").CreateMultiCheckBox({ width: '230px', defaultText : 'Select Below', height:'250px' });
+        });
+    </script>
+    <style>
+    .container {
+  display: flex;
+}
+</style>
+<style>
+      
+        #wrapper {
+      padding-top: 20px;
+      padding-left: 10px;
+      background: #fff;
+      border: 1px solid #ddd;
+      box-shadow: 0 22px 35px -16px rgba(0, 0, 0, 0.1);
+      max-width: 650px;
+      margin: 35px auto;
+    }
+    
+    .columns {
+      columns: 2;
+    }
+      
+    </style>
+    <script>
+      window.Promise ||
+        document.write(
+          '<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js"><\/script>'
+        )
+      window.Promise ||
+        document.write(
+          '<script src="https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20171210/classList.min.js"><\/script>'
+        )
+      window.Promise ||
+        document.write(
+          '<script src="https://cdn.jsdelivr.net/npm/findindex_polyfill_mdn"><\/script>'
+        )
+    </script>
+    <!-- <script src="../../../dist/apexcharts.js"></script> -->
+        <script>
+      // Replace Math.random() with a pseudo-random number generator to get reproducible results in e2e tests
+      // Based on https://gist.github.com/blixt/f17b47c62508be59987b
+      var _seed = 42;
+      Math.random = function() {
+        _seed = _seed * 16807 % 2147483647;
+        return (_seed - 1) / 2147483646;
+      };
+    </script>
+    <script>
+  // The global window.Apex variable below can be used to set common options for all charts on the page
+  Apex = {
+    chart: {
+      height: 160,
+    },
+    dataLabels: {
+      enabled: false
+    },
+    stroke: {
+      curve: 'straight'
+    },
+    toolbar: {
+      tools: {
+        selection: false
+      }
+    },
+    markers: {
+      size: 6,
+      hover: {
+        size: 10
+      }
+    },
+    tooltip: {
+      followCursor: false,
+      theme: 'light',
+      x: {
+        show: false
+      },
+      marker: {
+        show: false
+      },
+      y: {
+        title: {
+          formatter: function() {
+            return ''
+          }
+        }
+      }
+    },
+    grid: {
+      clipMarkers: false
+    },
+    yaxis: {
+      tickAmount: 2
+    },
+    xaxis: {
+      type: 'datetime'
+    },
+  }
+  
+  /*
+    // this function will generate output in this format
+    // data = [
+        [timestamp, 23],
+        [timestamp, 33],
+        [timestamp, 12]
+        ...
+    ]
+  */
+  function generateDayWiseTimeSeries(baseval, count, yrange) {
+    var i = 0;
+    var series = [];
+    while (i < count) {
+      var x = baseval;
+      var y = Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
+  
+      series.push([x, y]);
+      baseval += 86400000;
+      i++;
+    }
+    return series;
+  }
+  </script>
+
+  </head>
+
+  <body>
+  
+    <div class="container">
+      <div class="side-container">
+        <!-- First Dropdown -->
+      <div class="mb-3">
+    <label for="exampleFormControlSelect1" class="form-label">Select Channel</label>
+    <select id="test">
+        <option value="" disabled selected>Select Channel</option>
+  {% for file_data in data %}
+    {% for column in file_data['columns'] %}
+      <option value="{{ column }}">{{ column }}</option>
+    {% endfor %}
+  {% endfor %}
+
+    </select>
+
+  </div>
+  <!-- Second Dropdown -->
+
+  <div class="mb-3">
+    <label for="exampleFormControlSelect1" class="form-label">Select Date</label>
+    <select id="test_2">
+      {% for parquet_file in parquet_files %}
+      <option value="{{ parquet_file }}">{{ parquet_file }}</option>
+    {% endfor %}
+</select>
+  </div>
+  <!-- Third Dropdown -->
+    <div class="mb-3">
+    <label for="exampleFormControlSelect1" class="form-label">Start Time</label>
+    <select id="test_3">
+      <option value="" selected disabled>Select Start Time</option>
+</select>
+
+  </div>
+<!-- Fourth Dropdown -->
+      <div class="mb-3">
+    <label for="exampleFormControlSelect1" class="form-label">End Time</label>
+    <select id="test_4">
+      <option value="" selected disabled>Select End Time</option>
+</select>
+
+  </div>
+</div>
+
+ <div id="wrapper">
+        <div id="chart-line"></div>
+        <div id="chart-line2"></div>
+        <div id="chart-line3"></div>
+        <div class="columns">
+          <div id="chart-small"></div>
+          <div id="chart-small2"></div>
+        </div>
+        
+      </div>
+<!-- Graph to display data -->
+   
+  </div>
+</div>
+
+
+        <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+
+    <script src="{{ url_for('static', filename='vendor/libs/jquery/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/libs/popper/popper.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/js/bootstrap.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='vendor/js/menu.js') }}"></script>
+    <!-- endbuild -->
+
+    <!-- Vendors JS -->
+    <script src="{{ url_for('static', filename='vendor/libs/apex-charts/apexcharts.js') }}"></script>
+
+    <!-- Main JS -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    <!-- Page JS -->
+    <script src="{{ url_for('static', filename='js/dashboards-analytics.js') }}"></script>
+    
+
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script src="{{ url_for('static', filename='js/select-checkbox.js') }}"></script>
+
+    <!-- Add the following JavaScript to the <head> section or just before the closing </body> tag -->
+    <!-- <script src="{{ url_for('static', filename='js/app.js') }}"></script> -->
+  <script>
+      
+        var options = {
+          series: [{
+          data: generateDayWiseTimeSeries(new Date('11 Feb 2017').getTime(), 20, {
+            min: 10,
+            max: 60
+          })
+        }],
+          chart: {
+          id: 'fb',
+          group: 'social',
+          type: 'line',
+          height: 160
+        },
+        yaxis: {
+      labels: {
+        minWidth: 40
+      }
+    },
+        colors: ['#008FFB']
+        
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart-line"), options);
+        chart.render();
+      
+        var optionsLine2 = {
+          series: [{
+          data: generateDayWiseTimeSeries(new Date('11 Feb 2017').getTime(), 20, {
+            min: 10,
+            max: 30
+          })
+        }],
+          chart: {
+          id: 'tw',
+          group: 'social',
+          type: 'line',
+          height: 160
+        },
+          yaxis: {
+      labels: {
+        minWidth: 40 // Set the same minWidth for all charts in the 'social' group
+      }
+    },
+        
+        colors: ['#546E7A']
+        
+        };
+
+        var chartLine2 = new ApexCharts(document.querySelector("#chart-line2"), optionsLine2);
+        chartLine2.render();
+      
+        var optionsLine3 = {
+          series: [{
+          data: generateDayWiseTimeSeries(new Date('11 Feb 2017').getTime(), 20, {
+            min: 10,
+            max: 60
+          })
+        }],
+          chart: {
+          id: 'yt',
+          group: 'social',
+          type: 'line',
+          height: 160
+        },
+          yaxis: {
+      labels: {
+        minWidth: 40 // Set the same minWidth for all charts in the 'social' group
+      }
+    },
+        
+        colors: ['#00E396']
+        
+        };
+
+        var chartLine3 = new ApexCharts(document.querySelector("#chart-line3"), optionsLine3);
+        chartLine3.render();
+      
+        var optionsSmall = {
+          series: [{
+          data: generateDayWiseTimeSeries(new Date('11 Feb 2017').getTime(), 20, {
+            min: 10,
+            max: 60
+          })
+        }],
+          chart: {
+          id: 'ig',
+          group: 'social',
+          type: 'line',
+          height: 160,
+          width: 300
+        },
+            yaxis: {
+            labels: {
+            minWidth: 40 // Set the same minWidth for all charts in the 'social' group
+      }
+    },
+        
+        colors: ['#008FFB']
+      
+        };
+
+        var chartSmall = new ApexCharts(document.querySelector("#chart-small"), optionsSmall);
+        chartSmall.render();
+      
+        var optionsSmall2 = {
+          series: [{
+          data: generateDayWiseTimeSeries(new Date('11 Feb 2017').getTime(), 20, {
+            min: 10,
+            max: 60
+          })
+        }],
+          chart: {
+          id: 'li',
+          group: 'social',
+          type: 'line',
+          height: 160,
+          width: 300
+        },
+          yaxis: {
+          labels: {
+          minWidth: 40 // Set the same minWidth for all charts in the 'social' group
+      }
+    },
+        
+        colors: ['#546E7A']
+
+        };
+
+        var chartSmall2 = new ApexCharts(document.querySelector("#chart-small2"), optionsSmall2);
+        chartSmall2.render();
+      
+      
+    </script>
+  </body>
+</html>
