@@ -20,7 +20,7 @@ def get_parquet_files():
     parquet_files = [file for file in os.listdir(data_folder) if file.endswith('.parquet')]
     return parquet_files
 
-# Route for the home page (index.html)
+
 @app.route('/')
 def showparquet():
     parquet_files = get_parquet_files()
@@ -44,19 +44,23 @@ def showparquet():
     return render_template('graphindex.html', parquet_files=parquet_files, data=all_data, timeslots=timeslots)
 
 
-def fetch_data(channels, files):
+def fetch_data(channels, files, sampling_freq):
     SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
     all_data = []
-    cache_key = (tuple(channels), tuple(files))
+    print("samping freq", sampling_freq)
+    cache_key = (tuple(channels), tuple(files), sampling_freq)
     cached_result = cache.get(cache_key)
     if cached_result:
         return cached_result
+    print("not cached")
 
     for selected_file in files:
         parquet_file_path = os.path.join(SITE_ROOT, "static/data", selected_file)
         data = pd.read_parquet(parquet_file_path, engine='pyarrow')
         data['t'] = pd.to_datetime(data['t']).dt.tz_convert(None)
+        data = data.sort_values("t", ascending=True)
         data['t'] =data['t'].dt.strftime('%Y-%m-%dT%H:%M:%S.%fZ')
+        data = data.dropna()
 
         selected_file_data = []
         for channel in channels:
@@ -64,13 +68,14 @@ def fetch_data(channels, files):
                 channel_data = data[channel].tolist()
                 for timestamp, value in zip(data['t'], channel_data):
                     record = {'timestamp': timestamp, 'channel': channel, 'value': value}
-                    selected_file_data.append(record)
+                    # selected_file_data.append(record)
+                    all_data.append(record)
 
         # Filter out records with NaN values
-        selected_file_data = [record for record in selected_file_data if not pd.isna(record['value'])]
-        all_data.extend(selected_file_data)
-    cache[cache_key] = all_data
-    all_data_new = [all_data[x] for x in range(0, len(all_data), 60)]
+        # selected_file_data = [record for record in selected_file_data if not pd.isna(record['value'])]
+        # all_data.append(selected_file_data)
+    all_data_new = [all_data[x] for x in range(0, len(all_data), sampling_freq)]
+    cache[cache_key] = all_data_new
     return all_data_new
 
 
@@ -80,22 +85,18 @@ def handle_fetch_data():
     request_data = request.get_json()
     selected_channels = request_data.get('channels')
     selected_files = request_data.get('files')
+    sampling_freq = request_data.get('sampling_freq')
 
     print(request_data)
     if not selected_channels or not selected_files:
         return jsonify(error="Invalid request. Please select both channels and files.")
 
     try:
-        data = fetch_data(selected_channels, selected_files)
+        data = fetch_data(selected_channels, selected_files, sampling_freq)
         print(data)
         return jsonify(data)
     except Exception as e:
         return jsonify(error=str(e))
-
-
-
-
-
 
 
 if __name__ == '__main__':

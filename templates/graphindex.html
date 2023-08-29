@@ -56,10 +56,9 @@
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ url_for('static', filename='js/config.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script> -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@^3"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@^3"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/luxon@^2"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@^1"></script>
     <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8"></script>    
@@ -134,11 +133,11 @@
     {% endfor %}
   </select>
 </div>
-<button id="updateGraphsButton">Update Graphs</button>
-</div>
-
 <!-- Add this button for updating and displaying statistics -->
-
+<button id="updateGraphsButton">Update Graphs</button>
+<!-- Add this button for going back to original graph-->
+<button id="ResetTime">Reset Time</button>
+</div>
 
 <!-- Container to display statistics -->
 <div id="statisticsContainer"></div>
@@ -146,11 +145,7 @@
 <!-- Graph to display data -->
 
     <div id="chartContainer">
-  <!-- <canvas id="myChart" width="400" height="200"></canvas> -->
 </div>
-
-<!-- Graph to display data -->
-   
   </div>
 </div>
 
@@ -197,6 +192,7 @@ $(function() {
   msbDate.addEventListener("change", triggerDataFetch);
   function triggerDataFetch() {
 
+  const samplingFreq = 60
   const selectedChannels = []
   const selectedChannels_html = Array.from(document.querySelectorAll('#channel_selector')[0]);
   for (let i = 0; i < selectedChannels_html.length; i++) {
@@ -211,7 +207,7 @@ $(function() {
   if (numSelectedChannels >= 1 && numSelectedFiles >= 1 && numSelectedChannels <= 5 && numSelectedFiles <= 5) {
     console.log(selectedChannels);
     console.log(selectedFiles);
-    fetchData(selectedChannels, selectedFiles);
+    fetchData(selectedChannels, selectedFiles, samplingFreq);
   } else {
     console.log("Invalid selection");
   }
@@ -221,6 +217,17 @@ $(function() {
     updateGraphs(data); // Call the function to update graphs
   });
 
+  $("#ResetTime").on("click", function () {
+    $('#endTimeSelector option').prop('selected', function() {
+        return this.defaultSelected;
+    });
+    $('#startTimeSelector option').prop('selected', function() {
+        return this.defaultSelected;
+    });
+
+    let [channelDateDataMap, graphs] = separateData(data);
+    displayData(channelDateDataMap, graphs); // Call the function to update graphs
+  });
 
 
 
