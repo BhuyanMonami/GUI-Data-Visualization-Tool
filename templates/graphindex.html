@@ -110,6 +110,25 @@
 </select>
   </div>
 
+  <!-- Sampling rate text box -->
+  <div class="mb-3">
+    <div>
+    <label for="defaultFormControlInput" class="form-label">Select Frequency:F</label>
+    <input
+                          type="text"
+                          class="form-control"
+                          id="samplingFrequencyInput"
+                          placeholder="60"
+                          aria-describedby="defaultFormControlHelp"
+                          value="60"
+                        />
+      <div id="defaultFormControlHelp" class="form-text">
+         One data point every F * 0.1 seconds.
+      </div>
+    </div>
+  </div>
+
+
   <!-- Third Dropdown -->
 
   <div class="mb-3">
@@ -150,7 +169,6 @@
 </div>
 
 
-
         <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
 
@@ -184,15 +202,18 @@ $(function() {
   const msbChannel = document.getElementById("channel_selector");
   const msbDate = document.getElementById("msbdate");
 
+  const msbFreq = document.getElementById("samplingFrequencyInput");
+
   const msbStartTime = document.getElementById("startTimeSelector");
   const msbEndTime = document.getElementById("endTimeSelector");
 
 
   msbChannel.addEventListener("change", triggerDataFetch);
   msbDate.addEventListener("change", triggerDataFetch);
-  function triggerDataFetch() {
+  msbFreq.addEventListener("change", triggerDataFetch);
 
-  const samplingFreq = 60
+  function triggerDataFetch() {
+  const samplingFreq = parseInt(msbFreq.value);
   const selectedChannels = []
   const selectedChannels_html = Array.from(document.querySelectorAll('#channel_selector')[0]);
   for (let i = 0; i < selectedChannels_html.length; i++) {
@@ -204,9 +225,10 @@ $(function() {
   const numSelectedFiles = selectedFiles.length;
   
 
-  if (numSelectedChannels >= 1 && numSelectedFiles >= 1 && numSelectedChannels <= 5 && numSelectedFiles <= 5) {
+  if (numSelectedChannels >= 1 && numSelectedFiles >= 1 && numSelectedChannels <= 5 && numSelectedFiles <= 5 && samplingFreq >= 1) {
     console.log(selectedChannels);
     console.log(selectedFiles);
+    
     fetchData(selectedChannels, selectedFiles, samplingFreq);
   } else {
     console.log("Invalid selection");
@@ -228,8 +250,6 @@ $(function() {
     let [channelDateDataMap, graphs] = separateData(data);
     displayData(channelDateDataMap, graphs); // Call the function to update graphs
   });
-
-
 
   });
 

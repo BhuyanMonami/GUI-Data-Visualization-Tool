@@ -26,10 +26,12 @@ function separateData(data) {
 }
 
   let data;
-  function fetchData(selectedChannels, selectedFiles, samplingFreq) {
+function fetchData(selectedChannels, selectedFiles, samplingFreq) {
     console.log("Fetching data...");
-    console.log(selectedChannels)
-    console.log(selectedFiles)
+    console.log(selectedChannels);
+    console.log(selectedFiles);
+    console.log("Sampling Frequency:", samplingFreq);
+
     // Make an AJAX request to the backend with selectedChannel and selectedFile
     const startTime = performance.now();
     $.ajax({
@@ -252,7 +254,7 @@ function separateData(data) {
               chartContainer.id = `chartContainer-${graphId}`;
               chartContainer.className = 'chart-container';
               document.getElementById('chartContainer').appendChild(chartContainer);              
-             chartContainer.innerHTML = "No data available for the selected time frame.";
+             chartContainer.innerHTML = `No data available for the selected time frame for graph ID: ${graphId}`;
           }
         }
         ////////
@@ -271,11 +273,10 @@ function updateGraphs(data) {
     const selectedStartTime = document.getElementById("startTimeSelector").value;
     // alert(selectedStartTime.selectedIndex)
     const selectedEndTime = document.getElementById("endTimeSelector").value;
-    if ( typeof selectedStartTime == "undefined" || typeof selectedEndTime == "undefined"){
-      console.log("Time not selected")
-      return
+    if (!selectedStartTime || !selectedEndTime) {
+      console.log("Start Time and End Time must be selected");
+      return;
     }
-
 
     const selectedStartHour = parseInt(selectedStartTime.split(":")[0]);
     const selectedEndHour = parseInt(selectedEndTime.split(":")[0]);

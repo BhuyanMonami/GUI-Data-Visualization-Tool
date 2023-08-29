@@ -71,9 +71,6 @@ def fetch_data(channels, files, sampling_freq):
                     # selected_file_data.append(record)
                     all_data.append(record)
 
-        # Filter out records with NaN values
-        # selected_file_data = [record for record in selected_file_data if not pd.isna(record['value'])]
-        # all_data.append(selected_file_data)
     all_data_new = [all_data[x] for x in range(0, len(all_data), sampling_freq)]
     cache[cache_key] = all_data_new
     return all_data_new
