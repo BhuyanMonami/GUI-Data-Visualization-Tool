@@ -116,6 +116,8 @@ This code will detect the new .parquet files in the "static/data" folder and ins
 
 5. If there are files from different vehicles, then the .parquet files should be named with a vehicle identifier and then they can be stored in the same "static/data" folder. All the other functionalities would be the same. Minor adjustments might be needed in the front end JS code(`app.js`)
 
+6. The database is currently saved as 'database.db' in the same directory where our Python script is located. In order to make it accessible to clients, the database (in our case, 'database.db') should be hosted on a server. This server can be a cloud-based server, a dedicated hosting server, or a server within your organization's network(like Cambridge). The database server should be accessible to both your web application and the clients via a network connection.
+
 ## Hosting the code in Cambridge platform
 
 The goal is to host the GUI platform in First Hydrogen's dedicated Cambridge platform at https://hydrogen-vans.srcp.hpc.cam.ac.uk 
@@ -206,7 +208,9 @@ The data points that lie 1.5 times of IQR above Q3 and below Q1 are outliers.
 
 The resulting box plots would be saved as .png files in `static/data/data_anomalies/box_plots` .
 
-8. To run the code pass the start time, end time, file name, column_names. For example:
+8. These distribution and box plots give us an insight into the data. It's not difficult to understand that there are indeed many channels with skewed data. It is important to study these outliers for a particular channel independently as well in conjunction with other related channels.
+
+9. To run the code pass the start time, end time, file name, column_names. For example:
 
  ```
 $ (FH) python parquet.py --start-time 12:15:00 --end-time 12:20:50 --file-name 2023-05-31_OV71-JHX.parquet --column-names FCCU_PwrFuCellSysRaw Speed_kmh
