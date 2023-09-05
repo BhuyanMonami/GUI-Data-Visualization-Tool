@@ -225,10 +225,7 @@ $(function() {
   const numSelectedFiles = selectedFiles.length;
   
 
-  if (numSelectedChannels >= 1 && numSelectedFiles >= 1 && numSelectedChannels <= 5 && numSelectedFiles <= 5 && samplingFreq >= 1) {
-    console.log(selectedChannels);
-    console.log(selectedFiles);
-    
+  if (numSelectedChannels >= 1 && numSelectedFiles >= 1 && numSelectedChannels <= 5 && numSelectedFiles <= 5 && samplingFreq >= 1) {    
     fetchData(selectedChannels, selectedFiles, samplingFreq);
   } else {
     console.log("Invalid selection");
