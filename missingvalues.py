@@ -73,8 +73,8 @@ print(zero_variance_df)
 print("Processing of all files completed.")
 
 # Convert the DataFrames to CSV and save it to a file
-csv_file_path = os.path.join(SITE_ROOT, "static/data", "missing_values.csv")
-zero_variance_csv_path = os.path.join(SITE_ROOT, "static/data", "zero_variance_features.csv")
+csv_file_path = os.path.join(SITE_ROOT, "static/data/data_anomalies", "missing_values.csv")
+zero_variance_csv_path = os.path.join(SITE_ROOT, "static/data/data_anomalies", "zero_variance_features.csv")
 missing_values_df.to_csv(csv_file_path, index=False)
 zero_variance_df.to_csv(zero_variance_csv_path, index=False)
 
