@@ -143,7 +143,7 @@ The GUI platform needs to be tested under various conditions to find edge cases.
 ### Self-Hosted Options
 1. Flask is a WSGI application. A WSGI server is used to run the application, converting incoming HTTP requests to the standard WSGI environ, and converting outgoing WSGI responses to HTTP responses.
 
-2. We should run our WSGI application using a production WSGI server and HTTP server. There are many WSGI servers and HTTP servers, with many configuration possibilities. Detailed information regarding the platforms that can maange this for us can be found in the official Flask documentation: https://flask.palletsprojects.com/en/2.3.x/deploying/
+2. We should run our WSGI application using a production WSGI server and HTTP server. There are many WSGI servers and HTTP servers, with many configuration possibilities. Detailed information regarding the platforms that can manage this for us can be found in the official Flask documentation: https://flask.palletsprojects.com/en/2.3.x/deploying/
 
 3. WSGI servers have HTTP servers built-in. However, a dedicated HTTP server may be safer, more efficient, or more capable. Putting an HTTP server in front of the WSGI server is called a “reverse proxy.” Detailed information regarding how to do can be found in the official Flask documentation:
 https://flask.palletsprojects.com/en/2.3.x/deploying/
