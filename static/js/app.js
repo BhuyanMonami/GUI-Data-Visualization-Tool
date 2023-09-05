@@ -156,34 +156,6 @@ function fetchData(selectedChannels, selectedFiles, samplingFreq) {
     
     };
 
-      /////////////////////////////////////////////
-      // // Create a map to store values for each channel and date combination
-      // const channelDateDataMap = new Map();
-
-      // // Loop through the data and aggregate values for each channel and date
-      // if (data.length==0) {
-      //   calculateStatistics(channelDateDataMap,dataPoints=[], graphId='');
-      // }
-
-      // data.forEach((item) => {
-      //   const { timestamp, value, channel } = item;
-
-
-      //   // Convert the timestamp to a Luxon DateTime instance
-      //   const dateTime = luxon.DateTime.fromISO(timestamp);
-        
-      //   // Create a unique identifier for the graph using channel and date
-      //   const graphId = `${channel}-${dateTime.toISODate()}`;
-
-      //   // Check if the graph already exists in the channelDateDataMap
-      //   if (channelDateDataMap.has(graphId)) {
-      //     channelDateDataMap.get(graphId).push({ x: dateTime, y: value });
-      //   } else {
-      //     // If the graph is not in the map, create a new entry
-      //     channelDateDataMap.set(graphId, [{ x: dateTime, y: value }]);
-      //   }
-      // });
-      //////////////////////////////////////////////
 
       // Clear the previous charts
       if (window.chartInstances) {
@@ -203,9 +175,9 @@ function fetchData(selectedChannels, selectedFiles, samplingFreq) {
           data: dataPoints,
           borderColor: randomColor,
           backgroundColor: randomColor,
-          pointRadius: 0,
+          pointRadius: 1,
           showLine: true,
-          spanGaps: 1000*30, //in ms  
+          // spanGaps: 1000*30, //in ms  
           borderWidth: 0.5
         });
 
@@ -225,8 +197,8 @@ function fetchData(selectedChannels, selectedFiles, samplingFreq) {
 
 
         const ctx = document.createElement('canvas');
-        ctx.width = 600;
-        ctx.height = 400;
+        ctx.width = 800;
+        ctx.height = 600;
         //new
         const statisticsContainer = document.createElement('div');
         statisticsContainer.id = `statisticsContainer-${graphId}`;
@@ -294,37 +266,43 @@ function updateGraphs(data) {
     displayData(filteredchannelDateDataMap, graphs);
 }
 
-// Function to calculate and display statistics for a graph
-function calculateStatistics(channelDateDataMap,dataPoints, graphId) {
+function calculateStatistics(channelDateDataMap, dataPoints, graphId) {
     const statisticsContainer = document.getElementById(`statisticsContainer-${graphId}`);
 
-    console.log(graphId)
-
     if (channelDateDataMap.has(graphId)) {
-      console.log(graphId)
-    // if (data.length > 0) {
-      // console.log("length of data",data.length)
-       
-            // Calculate max, mean, and min values
-            const values = dataPoints.map((item) => item.y);
-            const max = Math.max(...values);
-            const mean = values.reduce((acc, val) => acc + val, 0) / values.length;
-            const min = Math.min(...values);
-
-            // Display statistics
-            statisticsContainer.innerHTML = `
-                <p>Max Value: ${max}</p>
-                <p>Mean Value: ${mean.toFixed(2)}</p>
-                <p>Min Value: ${min}</p>
-            `;
-         
-      }
-        else {
-            // No data available for the selected time frame
-          console.log('No data available for the selected time frame')
-            
+        const values = dataPoints.map((item) => item.y);
+        if (values.length === 0) {
+            statisticsContainer.innerHTML = "No data available for the selected time frame";
+            return;
         }
+
+        let max = -Infinity;
+        let min = Infinity;
+        let sum = 0;
+
+        for (const value of values) {
+            if (value > max) {
+                max = value;
+            }
+            if (value < min) {
+                min = value;
+            }
+            sum += value;
+        }
+
+        const mean = sum / values.length;
+
+        statisticsContainer.innerHTML = `
+            <p>Max Value: ${max}</p>
+            <p>Mean Value: ${mean.toFixed(2)}</p>
+            <p>Min Value: ${min}</p>
+        `;
+    } else {
+        // No data available for the selected time frame
+        statisticsContainer.innerHTML = "No data available for the selected time frame";
     }
+}
+
 
 
 
