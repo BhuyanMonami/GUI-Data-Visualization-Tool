@@ -126,7 +126,7 @@ We are seeking assistance from the concerned IT personnel to help us with this s
 
 ## Further Optimization
 
-The GUI platform needs to be tested under various conditions to find edge cases. It is to be noted that while it allows the user to choose the frequency at which data points are collected for rendering the graph, as one decreases the frequency, the platoform becomes considerably slower. Further optimization of the code is needed in future development satges to address perdormance and memory issues.
+The GUI platform needs to be tested under various conditions to find edge cases. It is to be noted that while it allows the user to choose the frequency at which data points are collected for rendering the graph, as one decreases the frequency, the platform becomes considerably slower. Further optimization of the code is needed in future development stages to address performance and memory issues.
 
 ## Access
 
