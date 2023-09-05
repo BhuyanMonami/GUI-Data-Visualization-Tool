@@ -170,7 +170,7 @@ https://dev.to/brandonwallace/deploy-flask-the-easy-way-with-gunicorn-and-nginx-
 
 4. Selecting these options will render the graphs for the selected channels as well as display the statistical data for those channels.
 
-5. Select the specific time frame from the **'START TIME'** dropdown and **'END TIME'** dropdown menus and then click om the **'Update Graphs'** button. Doing so, will update all your graphs on the GUI for the selecetd time frame as well as display the statistics for that particular time frame. Then click on **'Reset Time'** button to reset the graphs to the original graphs.
+5. Select the specific time frame from the **'START TIME'** dropdown and **'END TIME'** dropdown menus and then click om the **'Update Graphs'** button. Doing so, will update all your graphs on the GUI for the selected time frame as well as display the statistics for that particular time frame. Then click on **'Reset Time'** button to reset the graphs to the original graphs.
 
 6. You can hover on, zoom and pan the graphs. Then select the **'Reset Zoom'** button to reset the axes. 
 
