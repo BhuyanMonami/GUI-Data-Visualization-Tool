@@ -82,7 +82,7 @@ if __name__ == "__main__":
 
 ## Static files and Database
 
-1. The code graphindex.html has provision for fetching data from both the local directory as well as an SQL database. 
+1. The code graphindex.html has provision for fetching data from both the local directory as well as an SQLite database. 
 2. Run the following code to add the .parquet files to the database after storing the files in the "static/data" directory:
    ```
    $ (FH) python database.py
